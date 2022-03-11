@@ -1,5 +1,5 @@
 import optparse
-from sources import omnisint
+from sources.omnisint import Omnisint
 
 def menu():
     parser = optparse.OptionParser()
@@ -19,5 +19,5 @@ menu()
 
 if options.domain:
     domain = options.domain
-    omnisint = omnisint.Omnisint(domain)
+    omnisint = Omnisint(domain)
     omnisint.get_subdomains()
