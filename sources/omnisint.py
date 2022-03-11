@@ -9,7 +9,7 @@ class Omnisint:
         self.search()
 
     def search(self) -> None:
-        color_print("Sonar search", "Process started")
+        color_print("Omnisint search", "Process started")
 
         try:
             domain_name = self.domain
@@ -21,7 +21,7 @@ class Omnisint:
             self.number_of_subdomains = number_of_subdomains
 
         except (ConnectionError, TimeoutError):
-            color_print("Sonar search", "Sonar search failed - skipping", Colors.FAIL)
+            color_print("Omnisint search", "Omnisint search failed - skipping", Colors.FAIL)
 
     def get_subdomains(self) -> int:
         print(self.number_of_subdomains)
