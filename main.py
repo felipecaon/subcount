@@ -15,7 +15,6 @@ menu()
 # security trails
 # https://dnsrepo.noc.org/?search=yahoo.com.br
 # https://dns.bufferover.run/dns?q=uber.com
-# https://jldc.me/anubis/subdomains
 
 if options.domain:
     domain = options.domain
