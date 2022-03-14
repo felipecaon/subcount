@@ -1,0 +1,3 @@
+google.com
+hackerone.com
+bugcrowd.com

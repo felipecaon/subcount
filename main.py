@@ -9,15 +9,13 @@ from utils.utils import Colors
 def menu():
     parser = optparse.OptionParser()
     parser.add_option('-d', '--domain', dest="domain", help='ex: google.com')
+    parser.add_option('-l', '--list', dest="list", help='ex: list.txt')
 
     options, args = parser.parse_args()
     globals().update(locals())
 
-
-menu()
-
-if options.domain:
-    domain = options.domain
+def count_subdomains(domain: str) -> None:
+    domain = domain
 
     omnisint = Omnisint(domain)
     anubis = Anubis(domain)
@@ -31,4 +29,13 @@ if options.domain:
 
     print(f"{domain} - Omnisint: {omnisint_subdomains}, Anubis: {anubis_subdomains}, Securitytrails: {securitytrails_subdomains}, Spyse: {spyse_subdomains}")
 
+menu()
 
+if options.list:
+    f = open(options.list, "r")
+    domains = f.readlines()
+    for d in domains:
+        count_subdomains(d.strip())
+
+if options.domain:
+    count_subdomains(options.domain)
