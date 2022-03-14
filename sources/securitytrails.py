@@ -14,9 +14,9 @@ class Securitytrails:
 
             firefox_header = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:98.0) Gecko/20100101 Firefox/98.0"}
 
-            number_of_subdomains = requests.get(f"https://securitytrails.com/domain/{domain_name}/dns", timeout=15, headers=firefox_header)
+            response = requests.get(f"https://securitytrails.com/domain/{domain_name}/dns", timeout=15, headers=firefox_header)
 
-            tree = html.fromstring(number_of_subdomains.content)
+            tree = html.fromstring(response.content)
 
             subdomains = tree.xpath('/html/body/div[1]/div[1]/div[3]/main/div[1]/ul/li[4]/a/span/span/text()')
 
