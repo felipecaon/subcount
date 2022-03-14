@@ -7,5 +7,5 @@ class Colors:
     WARNING = '\033[93m'
     BOLD = '\033[1m'
 
-def color_print(title: str = "", text: str = "", color_type="") -> None:
-    print(f"[{Colors.OK}{title}{Colors.RESET}] {color_type}{text}{Colors.RESET}")
+def color_print(title: str = "", color_type="") -> None:
+    print(f"[{color_type}{title}{Colors.RESET}]")

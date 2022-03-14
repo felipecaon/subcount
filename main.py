@@ -1,6 +1,10 @@
 import optparse
 from sources.omnisint import Omnisint
 from sources.anubis import Anubis
+from sources.securitytrails import Securitytrails
+from sources.spyse import Spyse
+from utils.utils import color_print
+from utils.utils import Colors
 
 def menu():
     parser = optparse.OptionParser()
@@ -12,15 +16,19 @@ def menu():
 
 menu()
 
-# security trails
-# https://dnsrepo.noc.org/?search=yahoo.com.br
-# https://dns.bufferover.run/dns?q=uber.com
-
 if options.domain:
     domain = options.domain
 
     omnisint = Omnisint(domain)
     anubis = Anubis(domain)
+    securitytrails = Securitytrails(domain)
+    spyse = Spyse(domain)
 
-    omnisint.get_subdomains()
-    anubis.get_subdomains()
+    omnisint_subdomains = omnisint.get_subdomains()
+    anubis_subdomains= anubis.get_subdomains()
+    securitytrails_subdomains = securitytrails.get_subdomains()
+    spyse_subdomains = spyse.get_subdomains()
+
+    print(f"{domain} - Omnisint: {omnisint_subdomains}, Anubis: {anubis_subdomains}, Securitytrails: {securitytrails_subdomains}, Spyse: {spyse_subdomains}")
+
+
