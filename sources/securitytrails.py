@@ -16,9 +16,13 @@ class Securitytrails:
 
             response = requests.get(f"https://securitytrails.com/domain/{domain_name}/dns", timeout=15, headers=firefox_header)
 
+            subdomains = ['0']
             tree = html.fromstring(response.content)
 
-            subdomains = tree.xpath('/html/body/div[1]/div[1]/div[3]/main/div[1]/ul/li[4]/a/span/span/text()')
+            no_result = tree.xpath("/html/body/div[1]/div[1]/div[3]/main/div[1]/ul/li[4]/a/span/text()")
+
+            if not no_result:
+                subdomains = tree.xpath('/html/body/div[1]/div[1]/div[3]/main/div[1]/ul/li[4]/a/span/span/text()')
 
             self.number_of_subdomains = subdomains[0]
 

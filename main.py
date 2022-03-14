@@ -1,16 +1,15 @@
-import optparse
+import optparse, multiprocessing
 from sources.omnisint import Omnisint
 from sources.anubis import Anubis
 from sources.securitytrails import Securitytrails
 from sources.spyse import Spyse
-from utils.utils import check_if_domain_is_valid
-from utils.utils import color_print
-from utils.utils import Colors
+from utils.utils import check_if_domain_is_valid, color_print, Colors
 
 def menu():
     parser = optparse.OptionParser()
     parser.add_option('-d', '--domain', dest="domain", help='ex: google.com')
     parser.add_option('-l', '--list', dest="list", help='ex: list.txt')
+    parser.add_option('-t', '--threads', dest="threads", help='Number of threads, default is 5', default=20)
 
     options, args = parser.parse_args()
     globals().update(locals())
@@ -37,10 +36,19 @@ def count_subdomains(domain: str) -> None:
 menu()
 
 if options.list:
+    parallelism = multiprocessing.Pool(options.threads)
+
     f = open(options.list, "r")
-    domains = f.readlines()
-    for d in domains:
-        count_subdomains(d.strip())
+    domains = map(str.strip, f.readlines())
+    try:
+        parallelism.map(count_subdomains, domains)
+        parallelism.close()
+        parallelism.join()
+    except UnboundLocalError:
+        pass
+    except KeyboardInterrupt:
+        sys.exit(0)
+
 
 if options.domain:
     count_subdomains(options.domain)
