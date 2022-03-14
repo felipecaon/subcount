@@ -16,9 +16,13 @@ class Spyse:
 
             response = requests.get(f"https://spyse.com/search?target=domain&query={domain_name}&search_params=%5B%7B%22is_subdomain%22%3A%7B%22operator%22%3A%22eq%22,%22value%22%3A%22true%22%7D%7D%5D", timeout=15, headers=firefox_header)
 
+            subdomains = 0 
             tree = html.fromstring(response.content)
 
-            subdomains = tree.xpath("//div[@class='single-search__about']/text()")[0].replace("results", "").replace("About", "").replace(" ", "")
+            no_results = tree.xpath("//p[@class='no-results__title']/text()")
+
+            if not no_results:
+                subdomains = tree.xpath("//div[@class='single-search__about']/text()")[0].replace("results", "").replace("result", "").replace("About", "").replace(" ", "")
 
             self.number_of_subdomains = int(subdomains)
 

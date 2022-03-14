@@ -3,6 +3,7 @@ from sources.omnisint import Omnisint
 from sources.anubis import Anubis
 from sources.securitytrails import Securitytrails
 from sources.spyse import Spyse
+from utils.utils import check_if_domain_is_valid
 from utils.utils import color_print
 from utils.utils import Colors
 
@@ -16,6 +17,10 @@ def menu():
 
 def count_subdomains(domain: str) -> None:
     domain = domain
+
+    if not check_if_domain_is_valid(domain):
+        color_print(f"> Domain {domain} is not valid", Colors.FAIL)
+        return
 
     omnisint = Omnisint(domain)
     anubis = Anubis(domain)
