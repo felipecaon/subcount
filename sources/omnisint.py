@@ -18,7 +18,9 @@ class Omnisint:
 
         except (ConnectionError, TimeoutError):
             color_print("Omnisint search failed", Colors.FAIL)
+        except Exception as e:
+            self.number_of_subdomains = "FAIL"
 
-    def get_subdomains(self) -> int:
+    def get_subdomains(self) -> [int, str]:
         self.search()
         return self.number_of_subdomains

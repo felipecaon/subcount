@@ -16,19 +16,18 @@ class Securitytrails:
 
             response = requests.get(f"https://securitytrails.com/domain/{domain_name}/dns", timeout=15, headers=firefox_header)
 
-            subdomains = ['0']
             tree = html.fromstring(response.content)
 
-            no_result = tree.xpath("/html/body/div[1]/div[1]/div[3]/main/div[1]/ul/li[4]/a/span/text()")
+            subdomains = tree.xpath('/html/body/div[1]/div[1]/div[3]/main/div[1]/ul/li[4]/a/span/span/text()')
 
-            if not no_result:
-                subdomains = tree.xpath('/html/body/div[1]/div[1]/div[3]/main/div[1]/ul/li[4]/a/span/span/text()')
-
-            self.number_of_subdomains = subdomains[0]
+            if subdomains:
+                self.number_of_subdomains = subdomains[0].replace(",","")
 
         except (ConnectionError, TimeoutError):
             color_print("Securitytrails search failed", Colors.FAIL)
+        except Exception as e:
+            self.number_of_subdomains = "FAIL"
 
-    def get_subdomains(self) -> int:
+    def get_subdomains(self) -> [int, str]:
         self.search()
         return self.number_of_subdomains

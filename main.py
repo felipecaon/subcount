@@ -31,7 +31,7 @@ def count_subdomains(domain: str) -> None:
     securitytrails_subdomains = securitytrails.get_subdomains()
     spyse_subdomains = spyse.get_subdomains()
 
-    print(f"{domain} - Omnisint: {omnisint_subdomains}, Anubis: {anubis_subdomains}, Securitytrails: {securitytrails_subdomains}, Spyse: {spyse_subdomains}")
+    print(f"{domain} > Omnisint: {omnisint_subdomains}, Anubis: {anubis_subdomains}, Securitytrails: {securitytrails_subdomains}, Spyse: {spyse_subdomains}")
 
 menu()
 
