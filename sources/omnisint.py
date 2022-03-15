@@ -12,7 +12,7 @@ class Omnisint:
         try:
             domain_name = self.domain
 
-            number_of_subdomains = len(requests.get(f"https://sonar.omnisint.io/tlds/{domain_name}", timeout=15).json())
+            number_of_subdomains = len(requests.get(f"https://sonar.omnisint.io/subdomains/{domain_name}", timeout=15).json())
 
             self.number_of_subdomains = number_of_subdomains
 
