@@ -2,14 +2,14 @@
 
 Give a subdomain or list and subcount will retrieve only the amount of records of said domain
 
-## Current Sources
+## Sources
 
 - Omnilist
 - Spyse
 - SecurityTrails
 - Anubis
 
-# Usage
+## Usage
 
 ```bash
 Options:
@@ -21,7 +21,7 @@ Options:
                         Number of threads, default is 20
 ```
 
-# Output 
+## Output 
 
 ```bash
 $ python3 main.py -d google.com
